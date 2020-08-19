@@ -1,0 +1,102 @@
+<div class="container-fluid login">
+  <div *ngIf= "errmsg" class="text-danger">
+    <p>Id already exist!, Please try with aonther one</p>
+  </div>
+  <div *ngIf= "errmsg1" class="text-danger">
+    <p>Server Error, Try again after some times</p>
+  </div>
+  <div *ngIf= "successmsg" class="text-success">
+    <p>Registered Successfully</p>
+  </div>
+  <form [formGroup]="adddata" (ngSubmit)="onSubmit()">
+
+    <div class="form-group input-group">
+      <input type="number" class="form-control" formControlName="id" placeholder="Enter Id"
+      [ngClass] = "{'is-invalid':
+      adddata.get('id').touched && adddata.get('id').invalid}">
+  </div>
+
+  <div *ngIf="adddata.get('id').invalid && (adddata.get('id').dirty || adddata.get('id').touched)"
+  class="text-danger">
+    <div *ngIf="adddata.get('id').errors.required">Id is Required</div>
+    <div *ngIf="adddata.get('id').errors.pattern">Id must be a Number</div>
+    </div>
+
+    <div class="form-group input-group">
+      <input type="text" class="form-control" formControlName="Name" placeholder="Enter Name"
+      [ngClass] = "{'is-invalid':
+      adddata.get('Name').touched && adddata.get('Name').invalid}">
+  </div>
+
+  <div *ngIf="adddata.get('Name').invalid && (adddata.get('Name').dirty || adddata.get('Name').touched)"
+  class="text-danger">
+  <div *ngIf="adddata.get('Name').errors.minlength">
+    Name must be at least 3 Characters long.
+    </div>
+    <div *ngIf="adddata.get('Name').errors.required">Name is Required</div>
+    <div *ngIf="adddata.get('Name').errors.pattern">Name is invalid</div>
+    </div>
+
+    <div class="form-group input-group">
+      <input type="text" class="form-control" formControlName = "username" placeholder="Enter username">
+      </div>
+
+
+    <div class="form-group input-group">
+      <input type="email" class="form-control" formControlName = "email" placeholder="Enter email" [ngClass] = "{'is-invalid':
+      adddata.get('email').touched && adddata.get('email').invalid}">
+      </div>
+  <!-- Email Error -->
+      <div *ngIf = "adddata.get('email').touched && adddata.get('email').invalid" class="text-danger">
+          <div *ngIf="adddata.get('email').errors.required">Email is Required</div>
+          <div *ngIf="adddata.get('email').errors.pattern">Email must be valid</div>
+          </div>
+
+    <div formGroupName ="address">
+
+      <div class="form-group input-group">
+        <input type="text" class="form-control" formControlName="street" placeholder="Enter street">
+      </div>
+
+      <div class="form-group input-group">
+        <input type="text" class="form-control" formControlName="suite" placeholder="Enter suite">
+      </div>
+
+      <div class="form-group input-group">
+        <input type="text" class="form-control" formControlName = "city" placeholder="Enter city" [ngClass] = "{'is-invalid':
+        adddata.get('address.city').touched && adddata.get('address.city').invalid}">
+        </div>
+
+      <div *ngIf = "adddata.get('address.city').touched && adddata.get('address.city').invalid" class="text-danger">
+        <div *ngIf="adddata.get('address.city').errors.required">City is Required</div>
+        </div>
+
+      <div class="form-group input-group">
+        <input type="number" class="form-control" formControlName="zipcode" placeholder="Enter zipcode">
+      </div>
+
+      <div *ngIf = "adddata.get('address.zipcode').touched && adddata.get('address.zipcode').invalid" class="text-danger">
+        <div *ngIf="adddata.get('address.zipcode').errors.required">zipcode is Required</div>
+        <div *ngIf="adddata.get('address.zipcode').errors.pattern">zipcode is invalid</div>
+        </div>
+
+      <div formGroupName ="geo">
+        <div class= "form-group input-group">
+          <input type="number" class="form-control" formControlName="lat" placeholder="Enter lat">
+        </div>
+        <div class= "form-group input-group">
+          <input type="number" class="form-control" formControlName="lng" placeholder="Enter lng">
+        </div>
+
+      </div>
+    </div>
+
+    <div class= "form-group input-group">
+      <input type="number" class="form-control" formControlName="phone" placeholder="Enter phone">
+    </div>
+    <div class= "form-group input-group">
+      <input type="text" class="form-control" formControlName="website" placeholder="Enter website">
+    </div>
+    <button [disabled]= '!adddata.valid'  class="btn btn-primary btn-block" type="submit" >Add</button>
+  </form>
+</div>

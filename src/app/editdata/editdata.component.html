@@ -1,0 +1,114 @@
+<div class="container-fluid login">
+  <div *ngIf= "errmsg" class="text-danger">
+    <p>Id not found!, Please Add or try with aonther one</p>
+  </div>
+  <div *ngIf= "errmsg1" class="text-danger">
+    <p>Server Error, Try again after some times</p>
+  </div>
+  <form [formGroup]="searchData" (ngSubmit)="onSearch()">
+    <!-- <input type="number" formControlName="id" placeholder="Enter id"> -->
+    <div class="form-group input-group">
+      <input type="number" class="form-control" formControlName = "id" placeholder="Enter Id">
+      </div>
+    <button class = "btn btn-info btn-block" type="submit">Submit</button>
+  </form>
+</div>
+
+<div *ngIf= "hide" class="container-fluid login">
+  <form [formGroup]="editData" (ngSubmit)="onSubmit()">
+    <label class="form-control" >{{this.dataAfterSearch.id}}</label>
+
+    <div class="form-group input-group">
+      <input type="text" class="form-control" formControlName="Name" placeholder="Enter Name"
+      [ngClass] = "{'is-invalid':
+      editData.get('Name').touched && editData.get('Name').invalid}">
+  </div>
+
+  <div *ngIf="editData.get('Name').invalid && (editData.get('Name').dirty || editData.get('Name').touched)"
+  class="text-danger">
+  <div *ngIf="editData.get('Name').errors.minlength">
+    Name must be at least 3 Characters long.
+    </div>
+    <div *ngIf="editData.get('Name').errors.required">Name is Required</div>
+    <div *ngIf="editData.get('Name').errors.pattern">Name is invalid</div>
+    </div>
+
+    <div class="form-group input-group">
+      <input type="text" class="form-control" formControlName = "username" placeholder="Enter username">
+      </div>
+
+
+    <div class="form-group input-group">
+      <input type="email" class="form-control" formControlName = "email" placeholder="Enter email" [ngClass] = "{'is-invalid':
+      editData.get('email').touched && editData.get('email').invalid}">
+      </div>
+  <!-- Email Error -->
+      <div *ngIf = "editData.get('email').touched && editData.get('email').invalid" class="text-danger">
+          <div *ngIf="editData.get('email').errors.required">Email is Required</div>
+          <div *ngIf="editData.get('email').errors.pattern">Email must be valid</div>
+          </div>
+
+    <div formGroupName ="address">
+
+      <div class="form-group input-group">
+        <input type="text" class="form-control" formControlName="street" placeholder="Enter street">
+      </div>
+
+      <div class="form-group input-group">
+        <input type="text" class="form-control" formControlName="suite" placeholder="Enter suite">
+      </div>
+
+      <div class="form-group input-group">
+        <input type="text" class="form-control" formControlName = "city" placeholder="Enter city" [ngClass] = "{'is-invalid':
+        editData.get('address.city').touched && editData.get('address.city').invalid}">
+        </div>
+
+      <div *ngIf = "editData.get('address.city').touched && editData.get('address.city').invalid" class="text-danger">
+        <div *ngIf="editData.get('address.city').errors.required">City is Required</div>
+        </div>
+
+      <div class="form-group input-group">
+        <input type="text" class="form-control" formControlName="zipcode" placeholder="Enter zipcode">
+      </div>
+
+      <div *ngIf = "editData.get('address.zipcode').touched && editData.get('address.zipcode').invalid" class="text-danger">
+        <div *ngIf="editData.get('address.zipcode').errors.required">zipcode is Required</div>
+        <div *ngIf="editData.get('address.zipcode').errors.pattern">zipcode is invalid</div>
+        </div>
+
+      <div formGroupName ="geo">
+        <div class= "form-group input-group">
+          <input type="number" class="form-control" formControlName="lat" placeholder="Enter lat">
+        </div>
+        <div class= "form-group input-group">
+          <input type="number" class="form-control" formControlName="lng" placeholder="Enter lng">
+        </div>
+
+      </div>
+    </div>
+
+    <div class= "form-group input-group">
+      <input type="number" class="form-control" formControlName="phone" placeholder="Enter phone">
+    </div>
+    <div class= "form-group input-group">
+      <input type="text" class="form-control" formControlName="website" placeholder="Enter website">
+    </div>
+    <button class="btn btn-primary bt-block" type="submit">Submit</button>
+  </form>
+</div>
+
+<div *ngIf= "hide1" class="container-fluid login">
+  <div class="text-success"><p>Updated Data</p></div>
+  <label class="form-control">Id: {{this.dataAfterSearch.id}}</label>
+  <label class="form-control">Name: {{this.dataAfterSearch.Name}}</label>
+  <label class="form-control">username: {{this.dataAfterSearch.username}}</label>
+  <label class="form-control">email: {{this.dataAfterSearch.email}}</label>
+  <label class="form-control">street: {{this.dataAfterSearch.address.street}}</label>
+  <label class="form-control">suite: {{this.dataAfterSearch.address.suite}}</label>
+  <label class="form-control">city: {{this.dataAfterSearch.address.city}}</label>
+  <label class="form-control">zipcode: {{this.dataAfterSearch.address.zipcode}}</label>
+  <label class="form-control">lat: {{this.dataAfterSearch.address.geo.lat}}</label>
+  <label class="form-control">lng: {{this.dataAfterSearch.address.geo.lng}}</label>
+  <label class="form-control">phone: {{this.dataAfterSearch.phone}}</label>
+  <label class="form-control">website: {{this.dataAfterSearch.website}}</label>
+</div>

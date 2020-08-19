@@ -1,0 +1,19 @@
+<div class="container-fluid login">
+  <div *ngIf= "errmsg" class="text-danger">
+    <p>Id not found!, Please Add or try with aonther one</p>
+  </div>
+  <div *ngIf= "errmsg1" class="text-danger">
+    <p>Server Error, Try again after some times</p>
+  </div>
+  <div *ngIf= "sccuessmsg" class="text-success">
+    <p>"Data Deleted Successfully"</p>
+  </div>
+  <form [formGroup]="searchData" (ngSubmit)="onSubmit()">
+    <!-- <input type="number" formControlName="id" placeholder="Enter id"> -->
+    <div class="form-group input-group">
+      <input type="number" class="form-control" formControlName = "id" placeholder="Enter Id">
+      </div>
+    <button class = "btn btn-danger btn-block" type="submit">Delete</button>
+  </form>
+</div>
+

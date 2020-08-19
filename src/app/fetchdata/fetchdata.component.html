@@ -1,0 +1,33 @@
+<div class="container-fluid login">
+  <div *ngIf= "errmsg" class="text-danger">
+    <p>Id not found!, Please Add or try with aonther one</p>
+  </div>
+  <div *ngIf= "errmsg1" class="text-danger">
+    <p>Server Error, Try again after some times</p>
+  </div>
+  <form [formGroup]="searchData" (ngSubmit)="onSearch()">
+    <!-- <input type="number" formControlName="id" placeholder="Enter id"> -->
+    <div class="form-group input-group">
+      <input type="number" class="form-control" formControlName = "id" placeholder="Enter Id">
+      </div>
+    <button class = "btn btn-info btn-block" type="submit">Submit</button>
+  </form>
+</div>
+
+<div *ngIf= "hide" class="container-fluid login">
+
+  <label class="form-control">Id: {{this.dataAfterSearch.id}}</label>
+  <label class="form-control">Name: {{this.dataAfterSearch.Name}}</label>
+  <label class="form-control">username: {{this.dataAfterSearch.username}}</label>
+  <label class="form-control">email: {{this.dataAfterSearch.email}}</label>
+  <label class="form-control">street: {{this.dataAfterSearch.address.street}}</label>
+  <label class="form-control">suite: {{this.dataAfterSearch.address.suite}}</label>
+  <label class="form-control">city: {{this.dataAfterSearch.address.city}}</label>
+  <label class="form-control">zipcode: {{this.dataAfterSearch.address.zipcode}}</label>
+  <label class="form-control">lat: {{this.dataAfterSearch.address.geo.lat}}</label>
+  <label class="form-control">lng: {{this.dataAfterSearch.address.geo.lng}}</label>
+  <label class="form-control">phone: {{this.dataAfterSearch.phone}}</label>
+  <label class="form-control">website: {{this.dataAfterSearch.website}}</label>
+
+
+</div>
